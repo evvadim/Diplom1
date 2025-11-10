@@ -60,9 +60,21 @@ public class BurgerTest {
 
     @Test
     public void removeIngredientTest() {
+
+        // запоминаем удаляемый объект
         Ingredient removedIngredient = burger.ingredients.get(removedIngredientIndex);
+
+        // удаляем его из объекта
         burger.removeIngredient(removedIngredientIndex);
-        MatcherAssert.assertThat("Ingredient isn't remove", burger.ingredients, not(hasItem(removedIngredient)));
+
+        // удаляем его вручную
+        Ingredient testingRemovedIngredient = testingBurger.ingredients.remove(removedIngredientIndex);
+
+        // проверяем, что удаленные объекты одинаковые
+        assertThat("Removed Ingredients are not the same", removedIngredient, equalTo(testingRemovedIngredient));
+
+        // проверяем, что после удаления эталонный и тестируемый списки объектов одинаковые
+        assertThat("List of Ingredients are not equal after removing Ingredient", burger.ingredients, equalTo(testingBurger.ingredients));
     }
 
 }
