@@ -5,14 +5,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.hasItem;
+import static org.hamcrest.CoreMatchers.*;
 
 public class BurgerTest {
 
     Bun bun;
     Burger burger;
     int countOfIngredients = 8;
+    int removedIngredientIndex = 5;
 
     @Before
     public void setUp() throws Exception {
@@ -35,6 +35,13 @@ public class BurgerTest {
         burger.addIngredient(ingredient);
         MatcherAssert.assertThat("Object is not added", burger.ingredients, hasItem(ingredient));
         MatcherAssert.assertThat("Object is not last item", burger.ingredients.get(burger.ingredients.size() - 1), equalTo(ingredient));
+    }
+
+    @Test
+    public void removeIngredientTest() {
+        Ingredient removedIngredient = burger.ingredients.get(removedIngredientIndex);
+        burger.removeIngredient(removedIngredientIndex);
+        MatcherAssert.assertThat("Ingredient isn't remove", burger.ingredients, not(hasItem(removedIngredient)));
     }
 
 }
