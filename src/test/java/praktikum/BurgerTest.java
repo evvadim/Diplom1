@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.hasItem;
 
 public class BurgerTest {
 
@@ -26,6 +27,14 @@ public class BurgerTest {
     @Test
     public void setBunsTest() {
         MatcherAssert.assertThat("Buns is not the same", burger.bun, equalTo(bun));
+    }
+
+    @Test
+    public void addIngredientTest() {
+        Ingredient ingredient = Mockito.mock(Ingredient.class);
+        burger.addIngredient(ingredient);
+        MatcherAssert.assertThat("Object is not added", burger.ingredients, hasItem(ingredient));
+        MatcherAssert.assertThat("Object is not last item", burger.ingredients.get(burger.ingredients.size() - 1), equalTo(ingredient));
     }
 
 }
