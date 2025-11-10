@@ -21,18 +21,20 @@ public class BurgerGetReceiptTest {
     private final String bunName;
     private final List<IngredientType> ingredientType;
     private final List<String> ingredientName;
+    private final Float price;
 
-    public BurgerGetReceiptTest(String bunName, List<IngredientType> ingredientType, List<String> ingredientName) {
+    public BurgerGetReceiptTest(String bunName, List<IngredientType> ingredientType, List<String> ingredientName, Float price) {
         this.bunName = bunName;
         this.ingredientType = ingredientType;
         this.ingredientName = ingredientName;
+        this.price = price;
     }
 
     @Parameterized.Parameters (name = "Make burger receipt. Set {index}")
     public static Object[][] getNameData() {
             return new Object[][] {
-                    {"dust shadow", List.of(IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE), List.of("mucus", "bone", "chip", "mushrooms", "green-way")},
-                    {"dust shadow", List.of(IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE), List.of("green-way", "bone", "mucus", "mushrooms", "chip")},
+                    {"dust shadow", List.of(IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE), List.of("mucus", "bone", "chip", "mushrooms", "green-way"), 149.94f},
+                    {"dust shadow", List.of(IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE, IngredientType.FILLING, IngredientType.SAUCE), List.of("green-way", "bone", "mucus", "mushrooms", "chip"), 19.04f},
             };
     }
 
@@ -53,6 +55,8 @@ public class BurgerGetReceiptTest {
             burger.addIngredient(ingredient);
         }
 
+        Mockito.when(burger.getPrice()).thenReturn(price);
+
     }
 
     @Test
@@ -65,7 +69,7 @@ public class BurgerGetReceiptTest {
         }
 
         receipt.append(String.format("(==== %s ====)%n", bunName));
-        receipt.append(String.format("%nPrice: %f%n", burger.getPrice()));
+        receipt.append(String.format("%nPrice: %f%n", price));
 
         // сравниваем полученный рецепт со значением из метода
         assertThat("Receipt not equal", burger.getReceipt(), equalTo(receipt.toString()));
