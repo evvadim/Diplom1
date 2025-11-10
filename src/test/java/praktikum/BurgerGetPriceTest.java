@@ -16,10 +16,7 @@ public class BurgerGetPriceTest {
 
     Bun bun;
     Burger burger;
-    Burger testingBurger;
     Float burgerCoast;
-    Float testingBurgerCoast;
-
 
     // переменные для параметризации
     private final Float bunPrice;
@@ -55,20 +52,20 @@ public class BurgerGetPriceTest {
             burger.addIngredient(ingredient);
         }
 
-        // считаем стоимость бургера вручную
-        testingBurgerCoast = bunPrice * 2;
-
-        for (Float price : ingredientPrice) {
-            testingBurgerCoast += price;
-        }
-
     }
 
     @Test
     public void getPriceParamTest() {
 
-        burgerCoast = burger.getPrice();
-        assertThat("Coast not equal", burgerCoast, equalTo(testingBurgerCoast));
+        // считаем стоимость бургера вручную
+        burgerCoast = bunPrice * 2;
+
+        for (Float price : ingredientPrice) {
+            burgerCoast += price;
+        }
+
+        // сравниваем полученную стоимость со значением из метода
+        assertThat("Coast not equal", burger.getPrice(), equalTo(burgerCoast));
 
     }
 
