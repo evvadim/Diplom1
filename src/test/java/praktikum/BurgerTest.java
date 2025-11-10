@@ -14,6 +14,8 @@ public class BurgerTest {
     Burger testingBurger;
     int countOfIngredients = 8;
     int removedIngredientIndex = 5;
+    int moveIngredientFromIndex = 6;
+    int toNewIndex = 2;
 
     @Before
     public void setUp() throws Exception {
@@ -75,6 +77,20 @@ public class BurgerTest {
 
         // проверяем, что после удаления эталонный и тестируемый списки объектов одинаковые
         assertThat("List of Ingredients are not equal after removing Ingredient", burger.ingredients, equalTo(testingBurger.ingredients));
+    }
+
+    @Test
+    public void moveIngredientTest() {
+
+        // перемещаем объект списка методом класса
+        burger.moveIngredient(moveIngredientFromIndex, toNewIndex);
+
+        // перемещаем объект списка вручную
+        testingBurger.ingredients.add(toNewIndex, testingBurger.ingredients.remove(moveIngredientFromIndex));
+
+        // проверяем получившиеся списки
+        assertThat("Lists of Ingredients are not equal", burger.ingredients, equalTo(testingBurger.ingredients));
+
     }
 
 }
