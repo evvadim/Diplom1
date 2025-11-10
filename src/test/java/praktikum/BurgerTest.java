@@ -1,11 +1,11 @@
 package praktikum;
 
-import org.hamcrest.MatcherAssert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.MatcherAssert.*;
 
 public class BurgerTest {
 
@@ -36,7 +36,7 @@ public class BurgerTest {
 
     @Test
     public void setBunsTest() {
-        MatcherAssert.assertThat("Buns is not the same", burger.bun, equalTo(bun));
+        assertThat("Buns is not the same", burger.bun, equalTo(bun));
     }
 
     @Test
@@ -51,10 +51,10 @@ public class BurgerTest {
         testingBurger.ingredients.add(ingredient);
 
         // проверяем, что объекты состоят их одинаковых ингредиентов
-        MatcherAssert.assertThat("List of Ingredients are not equal", burger.ingredients, equalTo(testingBurger.ingredients));
+        assertThat("List of Ingredients are not equal after adding Ingredient", burger.ingredients, equalTo(testingBurger.ingredients));
 
         // проверяем, что добавленный элемент в конце списка
-        MatcherAssert.assertThat("Last item of List of Ingredients are not the same as added", burger.ingredients.get(burger.ingredients.size() - 1), equalTo(ingredient));
+        assertThat("Last item of List of Ingredients are not the same as added", burger.ingredients.get(burger.ingredients.size() - 1), equalTo(ingredient));
 
     }
 
