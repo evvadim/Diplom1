@@ -18,7 +18,7 @@ public class BurgerTest {
     int toNewIndex = 2;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         burger = new Burger();
         testingBurger = new Burger();
         bun = Mockito.mock(Bun.class);
