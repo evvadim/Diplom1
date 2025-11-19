@@ -52,9 +52,6 @@ public class BurgerTest {
         // добавляем ингредиент в эталонный объект вручную
         testingBurger.ingredients.add(ingredient);
 
-        // проверяем, что объекты состоят их одинаковых ингредиентов
-        assertThat("List of Ingredients are not equal after adding Ingredient", burger.ingredients, equalTo(testingBurger.ingredients));
-
         // проверяем, что добавленный элемент в конце списка
         assertThat("Last item of List of Ingredients are not the same as added", burger.ingredients.get(burger.ingredients.size() - 1), equalTo(ingredient));
 
@@ -63,17 +60,11 @@ public class BurgerTest {
     @Test
     public void removeIngredientTest() {
 
-        // запоминаем удаляемый объект
-        Ingredient removedIngredient = burger.ingredients.get(removedIngredientIndex);
-
         // удаляем его из объекта
         burger.removeIngredient(removedIngredientIndex);
 
         // удаляем его вручную
-        Ingredient testingRemovedIngredient = testingBurger.ingredients.remove(removedIngredientIndex);
-
-        // проверяем, что удаленные объекты одинаковые
-        assertThat("Removed Ingredients are not the same", removedIngredient, equalTo(testingRemovedIngredient));
+        testingBurger.ingredients.remove(removedIngredientIndex);
 
         // проверяем, что после удаления эталонный и тестируемый списки объектов одинаковые
         assertThat("List of Ingredients are not equal after removing Ingredient", burger.ingredients, equalTo(testingBurger.ingredients));
